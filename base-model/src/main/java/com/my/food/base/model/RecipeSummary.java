@@ -5,6 +5,8 @@
  */
 package com.my.food.base.model;
 
+import com.google.gson.Gson;
+
 /**
  *
  * @author yoovrajshinde
@@ -144,5 +146,11 @@ public class RecipeSummary {
     @Override
     public String toString() {
         return "RecipeSummary{" + "recipeId=" + recipeId + ", cookTime=" + cookTime + ", cookingMethod=" + cookingMethod + ", nutrition=" + nutrition + ", prepTime=" + prepTime + ", recipeCategory=" + recipeCategory + ", recipeCuisine=" + recipeCuisine + ", recipeYield=" + recipeYield + ", commentCount=" + commentCount + ", person=" + person + ", dateCreated=" + dateCreated + ", dateModified=" + dateModified + ", imageUrl=" + imageUrl + ", videUrl=" + videUrl + '}';
-    } 
+    }
+    public String toJson() {
+        return new Gson().toJson(this);
+    }
+    public RecipeSummary fromJson(String json) {
+        return new Gson().fromJson(json, this.getClass());
+    }
 }

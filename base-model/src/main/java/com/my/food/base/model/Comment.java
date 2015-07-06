@@ -10,10 +10,14 @@ package com.my.food.base.model;
  * @author yoovrajshinde
  */
 public class Comment {
+    String recipeId; // primary key
     String commentId;
     String comment;
     String commentTime;
 
+    public String getRecipeId() {
+        return recipeId;
+    }
     public String getCommentId() {
         return commentId;
     }
@@ -40,6 +44,7 @@ public class Comment {
 
     @Override
     public String toString() {
-        return "Comment{" + "commentId=" + commentId + ", comment=" + comment + ", commentTime=" + commentTime + '}';
-    } 
+        return "Comment{" + "recipeId=" + recipeId + ", commentId=" + commentId + ", comment=" + comment + ", commentTime=" + commentTime + '}';
+    }
+
 }

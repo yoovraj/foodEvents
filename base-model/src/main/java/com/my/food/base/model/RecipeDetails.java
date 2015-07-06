@@ -10,10 +10,14 @@ package com.my.food.base.model;
  * @author yoovrajshinde
  */
 public class RecipeDetails {
+    String recipeId; // primary key
     String[] recipeIngredient; //Ingredients used in the recipe
     String[] recipeInstructions; //A step or instruction involved in making the recipe
-    Comment[] comments; //Comments, typically from users.
     String description;
+
+    public String getRecipeId() {
+        return recipeId;
+    }
 
     public String[] getRecipeIngredient() {
         return recipeIngredient;
@@ -23,12 +27,12 @@ public class RecipeDetails {
         return recipeInstructions;
     }
 
-    public Comment[] getComments() {
-        return comments;
-    }
-
     public String getDescription() {
         return description;
+    }
+    
+    public void setRecipeId(String recipeId) {
+        this.recipeId = recipeId;
     }
 
     public void setRecipeIngredient(String[] recipeIngredient) {
@@ -39,17 +43,13 @@ public class RecipeDetails {
         this.recipeInstructions = recipeInstructions;
     }
 
-    public void setComments(Comment[] comments) {
-        this.comments = comments;
-    }
-
     public void setDescription(String description) {
         this.description = description;
     }
 
     @Override
     public String toString() {
-        return "RecipeDetails{" + "recipeIngredient=" + recipeIngredient + ", recipeInstructions=" + recipeInstructions + ", comments=" + comments + ", description=" + description + '}';
+        return "RecipeDetails{" + "recipeId=" + recipeId + ", recipeIngredient=" + recipeIngredient + ", recipeInstructions=" + recipeInstructions + ", description=" + description + '}';
     }
 
 }
