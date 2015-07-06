@@ -44,6 +44,8 @@ public class RecipeResource {
     public Recipe updateRecipeSummary(
             @PathParam("recipeId") String recipeId,
             RecipeSummary recipeSummary) {
+        long start = System.currentTimeMillis();
+        LOG.debug("recipeId={}, recipeSummary={}" , recipeId, recipeSummary.toString());
         recipeSummary.setRecipeId(recipeId);
         MongoDb dbConnection = new MongoDb();
         dbConnection.putRecipeSummary(recipeSummary);
@@ -51,6 +53,7 @@ public class RecipeResource {
         
         Recipe recipe = new Recipe();
         recipe.setRecipeSummary(updatedSummary);
+        LOG.info("POST /" + recipeId + "/summary : " + (System.currentTimeMillis() - start) +" ms");
         return recipe;
     }
 
@@ -96,9 +99,12 @@ public class RecipeResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Recipe getRecipeSummary(@PathParam("recipeId") String recipeId) {
+        long start = System.currentTimeMillis();
+        LOG.debug("recipeId={} " , recipeId);
         RecipeSummary recipeSummary = new MongoDb().getRecipeSummary(recipeId);
         Recipe recipe = new Recipe();
         recipe.setRecipeSummary(recipeSummary);
+        LOG.info("POST /" + recipeId + "/summary : " + (System.currentTimeMillis() - start) +" ms");
         return recipe;
     }
 

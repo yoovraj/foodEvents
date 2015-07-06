@@ -11,20 +11,26 @@ import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.eq;
 import com.my.food.base.model.RecipeSummary;
 import org.bson.BsonDocument;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  *
  * @author yoovrajshinde
  */
 public class MongoDb {
+    static final Logger LOG = LoggerFactory.getLogger(MongoDb.class);
+    
     static final MongoClient mongoClient = new MongoClient( "localhost" , 27017 );
     MongoDatabase database = null;
     
     public MongoDb() {
+        LOG.debug("getting database");
         database = mongoClient.getDatabase("foodEvents");
     }
     
     public void putRecipeSummary(RecipeSummary recipeSummary) {
         MongoCollection<BsonDocument> collectionRecipeSummary = database.getCollection("recipeSummary", BsonDocument.class);
+        LOG.debug("put json = {}", recipeSummary.toJson());
         BsonDocument bsonDocument = BsonDocument.parse(recipeSummary.toJson());
         collectionRecipeSummary.insertOne(bsonDocument);
     }
@@ -32,6 +38,7 @@ public class MongoDb {
     public RecipeSummary getRecipeSummary(String recipeId) {
         MongoCollection<BsonDocument> collectionRecipeSummary = database.getCollection("recipeSummary", BsonDocument.class);
         BsonDocument document = collectionRecipeSummary.find(eq("recipeId", recipeId)).first();
+        
         return new RecipeSummary().fromJson(document.toJson());
         
     }
