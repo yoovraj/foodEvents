@@ -9,6 +9,7 @@ import com.my.food.base.model.Comment;
 import com.my.food.base.model.RecipeDetails;
 import com.my.food.base.model.RecipeSummary;
 import com.my.food.recipe.api.response.Recipe;
+import com.my.food.recipe.db.MongoDb;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -43,7 +44,14 @@ public class RecipeResource {
     public Recipe updateRecipeSummary(
             @PathParam("recipeId") String recipeId,
             RecipeSummary recipeSummary) {
-        return new Recipe();
+        recipeSummary.setRecipeId(recipeId);
+        MongoDb dbConnection = new MongoDb();
+        dbConnection.putRecipeSummary(recipeSummary);
+        RecipeSummary updatedSummary = dbConnection.getRecipeSummary(recipeId);
+        
+        Recipe recipe = new Recipe();
+        recipe.setRecipeSummary(updatedSummary);
+        return recipe;
     }
 
     @Path("/{recipeId}/details")
@@ -88,7 +96,10 @@ public class RecipeResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Recipe getRecipeSummary(@PathParam("recipeId") String recipeId) {
-        return new Recipe();
+        RecipeSummary recipeSummary = new MongoDb().getRecipeSummary(recipeId);
+        Recipe recipe = new Recipe();
+        recipe.setRecipeSummary(recipeSummary);
+        return recipe;
     }
 
     @Path("/{recipeId}/details")
