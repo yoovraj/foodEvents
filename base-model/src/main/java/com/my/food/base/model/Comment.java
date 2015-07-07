@@ -13,7 +13,7 @@ public class Comment {
     String recipeId; // primary key
     String commentId;
     String comment;
-    String commentTime;
+    Long commentTime;
 
     public String getRecipeId() {
         return recipeId;
@@ -26,8 +26,12 @@ public class Comment {
         return comment;
     }
 
-    public String getCommentTime() {
+    public Long getCommentTime() {
         return commentTime;
+    }
+
+    public void setRecipeId(String recipeId) {
+        this.recipeId = recipeId;
     }
 
     public void setCommentId(String commentId) {
@@ -38,7 +42,7 @@ public class Comment {
         this.comment = comment;
     }
 
-    public void setCommentTime(String commentTime) {
+    public void setCommentTime(Long commentTime) {
         this.commentTime = commentTime;
     }
 
