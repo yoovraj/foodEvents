@@ -24,21 +24,21 @@ public class MongoDb {
     MongoDatabase database = null;
     
     public MongoDb() {
-        LOG.debug("getting database");
+        LOG.info("getting database");
         database = mongoClient.getDatabase("foodEvents");
     }
     
     public void putRecipeSummary(RecipeSummary recipeSummary) {
         MongoCollection<BsonDocument> collectionRecipeSummary = database.getCollection("recipeSummary", BsonDocument.class);
-        LOG.debug("put json = {}", recipeSummary.toJson());
         BsonDocument bsonDocument = BsonDocument.parse(recipeSummary.toJson());
+        LOG.info("put bsonDocument = {}", bsonDocument.toString());
         collectionRecipeSummary.insertOne(bsonDocument);
     }
 
     public RecipeSummary getRecipeSummary(String recipeId) {
         MongoCollection<BsonDocument> collectionRecipeSummary = database.getCollection("recipeSummary", BsonDocument.class);
         BsonDocument document = collectionRecipeSummary.find(eq("recipeId", recipeId)).first();
-        
+        LOG.info("get document = {}" , document.toString());
         return new RecipeSummary().fromJson(document.toJson());
         
     }
