@@ -49,7 +49,7 @@ public class RecipeResource {
         recipeSummary.setDateCreated(System.currentTimeMillis() / 1000);
         recipeSummary.setDateModified(System.currentTimeMillis() / 1000);
         recipeSummary.setImageUrl("image");
-        recipeSummary.setVideUrl("video");
+        recipeSummary.setVideoUrl("video");
 
         recipe.setRecipeSummary(recipeSummary);
 
