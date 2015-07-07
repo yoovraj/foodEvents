@@ -29,7 +29,7 @@ public class RecipeSummary {
     Long dateCreated;
     Long dateModified;
     String imageUrl;
-    String videUrl;
+    String videoUrl;
 
     public String getRecipeId() {
         return recipeId;
@@ -83,8 +83,8 @@ public class RecipeSummary {
         return imageUrl;
     }
 
-    public String getVideUrl() {
-        return videUrl;
+    public String getVideoUrl() {
+        return videoUrl;
     }
 
     public void setRecipeId(String recipeId) {
@@ -139,13 +139,13 @@ public class RecipeSummary {
         this.imageUrl = imageUrl;
     }
 
-    public void setVideUrl(String videUrl) {
-        this.videUrl = videUrl;
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
     }
 
     @Override
     public String toString() {
-        return "RecipeSummary{" + "recipeId=" + recipeId + ", cookTime=" + cookTime + ", cookingMethod=" + cookingMethod + ", nutrition=" + nutrition + ", prepTime=" + prepTime + ", recipeCategory=" + recipeCategory + ", recipeCuisine=" + recipeCuisine + ", recipeYield=" + recipeYield + ", commentCount=" + commentCount + ", person=" + person + ", dateCreated=" + dateCreated + ", dateModified=" + dateModified + ", imageUrl=" + imageUrl + ", videUrl=" + videUrl + '}';
+        return "RecipeSummary{" + "recipeId=" + recipeId + ", cookTime=" + cookTime + ", cookingMethod=" + cookingMethod + ", nutrition=" + nutrition + ", prepTime=" + prepTime + ", recipeCategory=" + recipeCategory + ", recipeCuisine=" + recipeCuisine + ", recipeYield=" + recipeYield + ", commentCount=" + commentCount + ", person=" + person + ", dateCreated=" + dateCreated + ", dateModified=" + dateModified + ", imageUrl=" + imageUrl + ", videoUrl=" + videoUrl + '}';
     }
     public String toJson() {
         return new Gson().toJson(this);
