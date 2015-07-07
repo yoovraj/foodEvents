@@ -11,6 +11,7 @@ import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.eq;
 import com.my.food.base.model.RecipeSummary;
 import org.bson.BsonDocument;
+import org.bson.BsonString;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 /**
@@ -31,13 +32,14 @@ public class MongoDb {
     public void putRecipeSummary(RecipeSummary recipeSummary) {
         MongoCollection<BsonDocument> collectionRecipeSummary = database.getCollection("recipeSummary", BsonDocument.class);
         BsonDocument bsonDocument = BsonDocument.parse(recipeSummary.toJson());
+        bsonDocument.put("_id", new BsonString(recipeSummary.getRecipeId()));
         LOG.info("put bsonDocument = {}", bsonDocument.toString());
         collectionRecipeSummary.insertOne(bsonDocument);
     }
 
     public RecipeSummary getRecipeSummary(String recipeId) {
         MongoCollection<BsonDocument> collectionRecipeSummary = database.getCollection("recipeSummary", BsonDocument.class);
-        BsonDocument document = collectionRecipeSummary.find(eq("recipeId", recipeId)).first();
+        BsonDocument document = collectionRecipeSummary.find(eq("_id", recipeId)).first();
         LOG.info("get document = {}" , document.toString());
         return new RecipeSummary().fromJson(document.toJson());
         
